@@ -1,17 +1,20 @@
 SHELL		= /bin/sh
 
 NAME		= avaj_launcher
-SOURCES	= $(shell find . -name "*.java")
+
+SOURCES	= $(shell find * -name "*.java")
 TARGET	= sources.txt
+BIN_DIR	= bin
 
 all: compile
 
-sources.txt:
-    echo "$(SOURCES)" > $(TARGET)
-
-compile: sources.txt
-    javac @sources.txt
+compile:
+	@printf "%s\n" $(SOURCES) > $(TARGET)
+	@echo "$$(wc -l < $(TARGET)) files copied to $(TARGET)"
+	@mkdir -p $(BIN_DIR)
+	@echo "javac compiles Java source:"
+	javac -d $(BIN_DIR) @sources.txt
 
 clean:
-    rm -f $(TARGET)
-    find . -name "*.class" -delete
+	rm -f $(TARGET)
+	rm -rf $(BIN_DIR)
