@@ -1,4 +1,4 @@
-package main.java.demre.avaj.simulator.factory;
+package demre.avaj.simulator.factory;
 
 public class AircraftFactory {
 

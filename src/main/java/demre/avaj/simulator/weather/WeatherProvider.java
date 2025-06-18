@@ -1,4 +1,4 @@
-package main.java.demre.avaj.simulator.weather;
+package demre.avaj.simulator.weather;
 
 public class WeatherProvider {
 

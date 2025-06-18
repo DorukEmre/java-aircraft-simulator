@@ -1,4 +1,4 @@
-package main.java.demre.avaj.simulator;
+package demre.avaj.simulator;
 
 import java.io.File;
 import java.io.BufferedReader;
@@ -7,7 +7,7 @@ import java.io.FileReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import main.java.demre.avaj.simulator.customExceptions.InvalidScenarioException;
+import demre.avaj.simulator.customExceptions.InvalidScenarioException;
 
 public class Simulator {
   public static void main(String[] args) {
@@ -20,9 +20,9 @@ public class Simulator {
       checkScenarioFile(scenarioFileName);
       System.out.println("File '" + scenarioFileName + "' checked successfully.");
 
-      // startSimulation(scenarioFileName);
-      // parseScenario;
-      // executeSimulation();
+      Simulation sim = new Simulation();
+      sim.parseScenario(scenarioFileName);
+      sim.runSimulation();
 
     } catch (Exception e) {
       errorAndExit(e.getMessage());

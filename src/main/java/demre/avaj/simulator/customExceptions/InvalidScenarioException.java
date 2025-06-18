@@ -1,4 +1,4 @@
-package main.java.demre.avaj.simulator.customExceptions;
+package demre.avaj.simulator.customExceptions;
 
 public class InvalidScenarioException extends IllegalArgumentException {
   // Default constructor

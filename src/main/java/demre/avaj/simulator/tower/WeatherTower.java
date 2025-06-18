@@ -1,4 +1,4 @@
-package main.java.demre.avaj.simulator.tower;
+package demre.avaj.simulator.tower;
 
 public class WeatherTower {
 

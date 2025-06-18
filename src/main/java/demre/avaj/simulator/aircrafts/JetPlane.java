@@ -1,4 +1,4 @@
-package main.java.demre.avaj.simulator.aircrafts;
+package demre.avaj.simulator.aircrafts;
 
 public class JetPlane {
 
