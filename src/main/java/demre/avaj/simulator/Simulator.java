@@ -1,24 +1,30 @@
 package main.java.demre.avaj.simulator;
 
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.BufferedReader;
+import java.io.FileReader;
 
-import main.java.demre.avaj.simulator.customExceptions.InvalidScenarioFileException;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import main.java.demre.avaj.simulator.customExceptions.InvalidScenarioException;
 
 public class Simulator {
   public static void main(String[] args) {
     try {
-      if (args.length == 1) {
-        String scenarioFileName = args[0];
-
-        checkScenarioFile(scenarioFileName);
-        System.out.println("File '" + scenarioFileName + "' exists and is a valid file.");
-
-      } else {
+      if (args.length != 1)
         throw new IllegalArgumentException("Wrong number of arguments.");
-      }
+
+      String scenarioFileName = args[0];
+
+      checkScenarioFile(scenarioFileName);
+      System.out.println("File '" + scenarioFileName + "' checked successfully.");
+
+      // startSimulation(scenarioFileName);
+      // parseScenario;
+      // executeSimulation();
+
     } catch (Exception e) {
-      System.out.println("Caught");
       errorAndExit(e.getMessage());
 
       // } catch (Error err) {
@@ -28,7 +34,7 @@ public class Simulator {
   }
 
   private static void checkScenarioFile(String scenarioFileName)
-      throws FileNotFoundException, InvalidScenarioFileException {
+      throws InvalidScenarioException, FileNotFoundException, IOException {
     File scenarioFile = new File(scenarioFileName);
 
     if (!scenarioFile.exists() || !scenarioFile.isFile()) {
@@ -39,22 +45,61 @@ public class Simulator {
     checkScenarioFileContent(scenarioFile);
   }
 
-  private static void checkScenarioFileContent(File scenarioFile) throws InvalidScenarioFileException {
+  private static void checkScenarioFileContent(File scenarioFile)
+      throws InvalidScenarioException, FileNotFoundException, IOException {
 
-    // The first line of the file contains a positive integer number. This number
-    // represents the number of times the simulation is run. In our case, this will
-    // be the number of times a weather change is triggered.
-    // Each following line describes an aircraft that will be part of the
-    // simulation, with this format: TYPE NAME LONGITUDE LATITUDE HEIGHT.
-    //
-    // 25
-    // Baloon B1 2 3 20
-    // Baloon B2 1 8 66
-    // JetPlane J1 23 44 32
-    // Helicopter H1 654 33 20
+    if (scenarioFile.length() == 0)
+      throw new InvalidScenarioException();
 
-    if (true) {
-      throw new InvalidScenarioFileException();
+    try (FileReader fr = new FileReader(scenarioFile);
+        BufferedReader br = new BufferedReader(fr)) {
+      String line;
+      boolean firstLine = true;
+
+      while ((line = br.readLine()) != null) {
+        System.out.println(line);
+
+        if (firstLine) {
+          firstLine = false;
+          try {
+            int simulationCount = Integer.parseInt(line.trim());
+            if (simulationCount <= 0) {
+              throw new InvalidScenarioException("The first line must be a positive integer.");
+            }
+          } catch (NumberFormatException e) {
+            throw new InvalidScenarioException("The first line must be a valid integer.");
+          }
+
+        } else {
+          // Split line in exactly 5 components
+          String[] components = line.trim().split(" ");
+          if (components.length != 5) {
+            throw new InvalidScenarioException("Each line must have exactly 5 components.");
+          }
+
+          // Check component validity
+          String type = components[0];
+          // String name = components[1];
+          int longitude, latitude, height;
+
+          try {
+            longitude = Integer.parseInt(components[2]);
+            latitude = Integer.parseInt(components[3]);
+            height = Integer.parseInt(components[4]);
+          } catch (NumberFormatException e) {
+            throw new InvalidScenarioException("Longitude, latitude, and height must be valid integers.");
+          }
+
+          if ((!type.equals("Baloon")
+              && !type.equals("JetPlane")
+              && !type.equals("Helicopter"))
+              || (longitude <= 0 || latitude <= 0)
+              || (height < 1)) {
+            throw new InvalidScenarioException();
+          }
+
+        }
+      }
     }
   }
 

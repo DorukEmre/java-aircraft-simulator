@@ -1,23 +1,23 @@
 package main.java.demre.avaj.simulator.customExceptions;
 
-public class InvalidScenarioFileException extends IllegalArgumentException {
+public class InvalidScenarioException extends IllegalArgumentException {
   // Default constructor
-  public InvalidScenarioFileException() {
+  public InvalidScenarioException() {
     super("Invalid scenario file.");
   }
 
   // Constructor with custom message
-  public InvalidScenarioFileException(String message) {
+  public InvalidScenarioException(String message) {
     super(message);
   }
 
   // Constructor with custom message and cause
-  public InvalidScenarioFileException(String message, Throwable cause) {
+  public InvalidScenarioException(String message, Throwable cause) {
     super(message, cause);
   }
 
   // Constructor with cause
-  public InvalidScenarioFileException(Throwable cause) {
+  public InvalidScenarioException(Throwable cause) {
     super(cause);
   }
 
