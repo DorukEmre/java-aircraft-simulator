@@ -8,9 +8,8 @@ package demre.avaj.simulator.aircrafts;
 
 public class Helicopter extends Aircraft {
 
-  public Helicopter(long p_id, string p_name, Coordinates p_coordinate) {
-    // To fix: Implicit super constructor Aircraft() is undefined. Must explicitly
-    // invoke another constructor
+  public Helicopter(long p_id, String p_name, Coordinates p_coordinate) {
+    super(p_id, p_name, p_coordinate);
   }
 
   @Override
