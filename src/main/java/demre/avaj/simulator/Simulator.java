@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import demre.avaj.simulator.aircrafts.Simulation;
 import demre.avaj.simulator.customExceptions.InvalidScenarioException;
 
 public class Simulator {
