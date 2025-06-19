@@ -11,11 +11,11 @@ import demre.avaj.simulator.factory.AircraftFactory;
 import demre.avaj.simulator.weather.WeatherProvider;
 
 public class Simulation {
-  private static int turn = 0;
-  private static int simulationSeed = 0;
-  ArrayList<Flyable> aircrafts;
-  AircraftFactory factory;
-  WeatherProvider weatherProvider;
+  private static int turn = 0; // number of times the simulation will run
+  private static int simulationSeed = 0; // random number used as seed
+  ArrayList<Flyable> aircrafts; // array of all aircrafts
+  AircraftFactory factory; // singleton
+  WeatherProvider weatherProvider; // singleton
 
   // Constructor
   public Simulation() {
