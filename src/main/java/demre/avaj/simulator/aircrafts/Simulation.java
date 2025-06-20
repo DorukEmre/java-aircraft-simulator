@@ -12,7 +12,7 @@ import demre.avaj.simulator.weather.WeatherProvider;
 import static demre.avaj.simulator.Simulator.errorAndExit;
 
 public class Simulation {
-  private static Simulation instance;
+  private static Simulation instance; // singleton
 
   private int turn; // number of times the simulation will run
   private int simulationSeed; // random number used as seed
@@ -29,7 +29,7 @@ public class Simulation {
 
     // Each simulation gets a random seed number
     Random random = new Random();
-    simulationSeed = random.nextInt();
+    this.simulationSeed = random.nextInt();
 
     this.parseScenario(scenarioFileName);
   }
@@ -60,6 +60,16 @@ public class Simulation {
     return instance;
   }
 
+  // Setters
+
+  public void setTurn(int num) {
+    turn = num;
+  }
+
+  public void decreaseTurn() {
+    turn = turn - 1;
+  }
+
   // Member functions //
 
   private void parseScenario(String scenarioFileName) throws IOException {
@@ -75,7 +85,7 @@ public class Simulation {
 
         if (firstLine) {
           firstLine = false;
-          turn = Integer.parseInt(line.trim());
+          setTurn(Integer.parseInt(line.trim()));
 
         } else {
           String[] components = line.trim().split(" ");
@@ -101,6 +111,13 @@ public class Simulation {
   public void runSimulation() {
 
     System.out.println("aircrafts.size: " + aircrafts.size());
+    for (Flyable aircraft : aircrafts) {
+      System.out.println(aircraft.getClass() + " " + aircraft.getName());
+      // Coordinates coords = aircraft.getCoordinates();
+      // System.out.println("Coordinates: Longitude: " + coords.getLongitude() +
+      // ", Latitude: " + coords.getLatitude() +
+      // ", Height: " + coords.getHeight());
+    }
 
   };
 

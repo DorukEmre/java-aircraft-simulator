@@ -23,4 +23,8 @@ public class Aircraft extends Flyable {
   public void updateConditions() {
     // keep empty method to allow Aircraft to be a concrete class
   }
+
+  public String getName() {
+    return name;
+  }
 }

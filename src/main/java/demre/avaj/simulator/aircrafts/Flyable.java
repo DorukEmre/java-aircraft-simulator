@@ -23,4 +23,7 @@ public abstract class Flyable {
   // puml doesn't specify return type
   public void registerTower(WeatherTower p_tower) {
   }
+
+  // Additional member functions
+  public abstract String getName();
 }
