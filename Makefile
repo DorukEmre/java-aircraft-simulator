@@ -6,7 +6,7 @@ SOURCES	= $(shell find * -name "*.java")
 TARGET	= sources.txt
 BIN_DIR	= bin
 
-all: compile
+all: compile run
 
 compile:
 	@printf "%s\n" $(SOURCES) > $(TARGET)
@@ -14,6 +14,9 @@ compile:
 	@mkdir -p $(BIN_DIR)
 	@echo "javac compiles Java source:"
 	javac -d $(BIN_DIR) @sources.txt
+
+run:
+	java -cp bin demre.avaj.simulator.Simulator scenario.txt
 
 clean:
 	rm -f $(TARGET)
