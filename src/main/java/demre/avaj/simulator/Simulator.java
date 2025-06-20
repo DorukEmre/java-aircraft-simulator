@@ -19,7 +19,7 @@ public class Simulator {
       String scenarioFileName = args[0];
 
       checkScenarioFile(scenarioFileName);
-      System.out.println("File '" + scenarioFileName + "' checked successfully.");
+      System.out.println("File '" + scenarioFileName + "' checked successfully.\n");
 
       Simulation sim = new Simulation();
       sim.parseScenario(scenarioFileName);

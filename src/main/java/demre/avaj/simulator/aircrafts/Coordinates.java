@@ -1,5 +1,16 @@
 package demre.avaj.simulator.aircrafts;
 
+// class Coordinates
+// {
+// -int longitude
+// -int latitute
+// -int height
+// ~Coordinates(int p_longitude, int p_latitude, int p_height)
+// +int getLongitude()
+// +int getLatitude()
+// +int getHeight()
+// }
+
 public class Coordinates {
 
   private int longitude;

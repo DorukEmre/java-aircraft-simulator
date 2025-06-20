@@ -7,6 +7,13 @@ import java.util.Random;
 
 import demre.avaj.simulator.aircrafts.Coordinates;
 
+// class WeatherProvider <<Singleton>>
+// {
+// -string[] weather
+// -WeatherProvider()
+// +string getCurrentWeather(Coordinates p_coordinates)
+// }
+
 public class WeatherProvider {
   // Static instance of the singleton
   private static WeatherProvider instance;

@@ -1,5 +1,7 @@
 package demre.avaj.simulator.aircrafts;
 
+import demre.avaj.simulator.tower.WeatherTower;
+
 // abstract Flyable
 // {
 // #WeatherTower weatherTower
@@ -7,12 +9,16 @@ package demre.avaj.simulator.aircrafts;
 // +registerTower(WeatherTower* p_tower)
 // }
 
+// If Flyable was an 'interface', every method would be implicitely public abstract.
+// As we have both abstract and concrete methods, it must be an abstract class and the relationship in the uml '<|..' is incorrect. 
+// '<|..' is for interface implementation
+
 public abstract class Flyable {
-  // protected WeatherTower weatherTower;
+  protected WeatherTower weatherTower;
 
   public abstract void updateConditions();
 
   // puml doesn't specify return type
-  // public void registerTower(WeatherTower tower) {
-  // }
+  public void registerTower(WeatherTower p_tower) {
+  }
 }
