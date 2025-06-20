@@ -9,16 +9,20 @@ import java.util.Random;
 
 import demre.avaj.simulator.factory.AircraftFactory;
 import demre.avaj.simulator.weather.WeatherProvider;
+import static demre.avaj.simulator.Simulator.errorAndExit;
 
 public class Simulation {
-  private static int turn = 0; // number of times the simulation will run
-  private static int simulationSeed = 0; // random number used as seed
+  private static Simulation instance;
+
+  private int turn; // number of times the simulation will run
+  private int simulationSeed; // random number used as seed
+
   ArrayList<Flyable> aircrafts; // array of all aircrafts
   AircraftFactory factory; // singleton
   WeatherProvider weatherProvider; // singleton
 
   // Constructor
-  public Simulation() {
+  private Simulation(String scenarioFileName) throws IOException {
     this.aircrafts = new ArrayList<>();
     this.factory = AircraftFactory.getInstance();
     this.weatherProvider = WeatherProvider.getInstance();
@@ -26,19 +30,39 @@ public class Simulation {
     // Each simulation gets a random seed number
     Random random = new Random();
     simulationSeed = random.nextInt();
+
+    this.parseScenario(scenarioFileName);
   }
 
-  public static int getTurn() {
+  // Getters //
+
+  public int getTurn() {
     return turn;
   }
 
-  public static int getSimulationSeed() {
+  public int getSimulationSeed() {
     return simulationSeed;
   }
 
-  ////////////////////////////
+  public static Simulation getInstance(String scenarioFileName) throws IOException {
+    if (instance == null && !scenarioFileName.isEmpty()) {
+      instance = new Simulation(scenarioFileName);
+    } else if (instance == null) {
+      errorAndExit("Simulation instantiation failed.");
+    }
+    return instance;
+  }
 
-  public void parseScenario(String scenarioFileName) throws IOException {
+  public static Simulation getInstance() {
+    if (instance == null) {
+      errorAndExit("Simulation not instantiated.");
+    }
+    return instance;
+  }
+
+  // Member functions //
+
+  private void parseScenario(String scenarioFileName) throws IOException {
     File scenarioFile = new File(scenarioFileName);
     try (FileReader fr = new FileReader(scenarioFile);
         BufferedReader br = new BufferedReader(fr)) {
@@ -63,10 +87,6 @@ public class Simulation {
           int height = Integer.parseInt(components[4]);
 
           Coordinates coord = new Coordinates(longitude, latitude, height);
-
-          System.out.println(
-              "Weather (coord): " + weatherProvider.getCurrentWeather(coord) + "\t(" + longitude + "," + latitude + ","
-                  + height + ")");
 
           // Factory creates new flyable aircraft
           Flyable aircraft = factory.newAircraft(type, name, coord);

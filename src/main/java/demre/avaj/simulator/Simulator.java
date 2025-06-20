@@ -21,8 +21,7 @@ public class Simulator {
       checkScenarioFile(scenarioFileName);
       System.out.println("File '" + scenarioFileName + "' checked successfully.\n");
 
-      Simulation sim = new Simulation();
-      sim.parseScenario(scenarioFileName);
+      Simulation sim = Simulation.getInstance(scenarioFileName);
       sim.runSimulation();
 
     } catch (Exception e) {
