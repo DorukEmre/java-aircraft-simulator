@@ -1,6 +1,7 @@
 package demre.avaj.simulator.tower;
 
 import demre.avaj.simulator.aircrafts.Coordinates;
+import demre.avaj.simulator.aircrafts.Simulation;
 import demre.avaj.simulator.weather.WeatherProvider;
 
 // class WeatherTower
@@ -9,7 +10,7 @@ import demre.avaj.simulator.weather.WeatherProvider;
 // +void changeWeather()
 // }
 
-// ConcreteSubject
+// ConcreteSubject in Observer behavioral pattern
 
 public class WeatherTower extends Tower {
   // Constructor
@@ -17,13 +18,17 @@ public class WeatherTower extends Tower {
     super();
   }
 
-  // getter
+  // Getter
   public String getWeather(Coordinates p_coordinates) {
     return (WeatherProvider.getInstance().getCurrentWeather(p_coordinates));
   }
 
-  // setter
+  // Setter
   public void changeWeather() {
-
+    // Advance simulation turn and notify observers that weather state changed
+    if (Simulation.getInstance().getTurn() > 0) {
+      Simulation.getInstance().decreaseTurn();
+      conditionChanged();
+    }
   }
 }
