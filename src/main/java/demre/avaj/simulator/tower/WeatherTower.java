@@ -1,6 +1,7 @@
 package demre.avaj.simulator.tower;
 
 import demre.avaj.simulator.aircrafts.Coordinates;
+import demre.avaj.simulator.weather.WeatherProvider;
 
 // class WeatherTower
 // {
@@ -8,12 +9,20 @@ import demre.avaj.simulator.aircrafts.Coordinates;
 // +void changeWeather()
 // }
 
+// ConcreteSubject
+
 public class WeatherTower extends Tower {
-  public String getWeather(Coordinates p_coordinates) {
-    String weather = "";
-    return weather;
+  // Constructor
+  WeatherTower() {
+    super();
   }
 
+  // getter
+  public String getWeather(Coordinates p_coordinates) {
+    return (WeatherProvider.getInstance().getCurrentWeather(p_coordinates));
+  }
+
+  // setter
   public void changeWeather() {
 
   }

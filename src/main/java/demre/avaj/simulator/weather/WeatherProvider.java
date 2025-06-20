@@ -1,7 +1,6 @@
 package demre.avaj.simulator.weather;
 
-import static demre.avaj.simulator.aircrafts.Simulation.getSimulationSeed;
-import static demre.avaj.simulator.aircrafts.Simulation.getTurn;
+import demre.avaj.simulator.aircrafts.Simulation;
 
 import java.util.Random;
 
@@ -37,8 +36,8 @@ public class WeatherProvider {
     int seed = p_coordinates.getLongitude()
         * p_coordinates.getLatitude()
         * p_coordinates.getHeight()
-        * (getTurn() + 1)
-        * getSimulationSeed();
+        * (Simulation.getInstance().getTurn() + 1)
+        * Simulation.getInstance().getSimulationSeed();
 
     Random random = new Random(seed);
 

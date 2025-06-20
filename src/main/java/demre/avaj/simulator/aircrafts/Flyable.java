@@ -16,6 +16,8 @@ import demre.avaj.simulator.tower.WeatherTower;
 public abstract class Flyable {
   protected WeatherTower weatherTower;
 
+  // Observer defines an update() method that will be called by the Subject
+  // whenever there is a change.
   public abstract void updateConditions();
 
   // puml doesn't specify return type

@@ -1,5 +1,6 @@
 package demre.avaj.simulator.tower;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import demre.avaj.simulator.aircrafts.Flyable;
@@ -12,19 +13,33 @@ import demre.avaj.simulator.aircrafts.Flyable;
 // #void conditionChanged()
 // }
 
+// Tower acts as a subject/publisher, notifying Flyable objects (observers/subscribers) of changes
+
 public class Tower {
   private List<Flyable> observers;
 
+  Tower() {
+    this.observers = new ArrayList<Flyable>();
+  }
+
+  // addObserver()
   public void register(Flyable p_flyable) {
-
+    observers.add(p_flyable);
   }
 
+  // removeObserver()
   public void unregister(Flyable p_flyable) {
-
+    observers.remove(p_flyable);
   }
 
+  // notifyObservers()
   protected void conditionChanged() {
-
+    // Notify all observers about a change in the tower's state
+    if (observers != null) {
+      for (Flyable observer : observers) {
+        observer.updateConditions();
+      }
+    }
   }
 
 }
