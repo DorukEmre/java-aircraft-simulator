@@ -27,8 +27,9 @@ public class WeatherTower extends Tower {
   // Setter
   public void changeWeather() {
     // Advance simulation turn and notify observers that weather state changed
-    if (Simulation.getInstance().getTurn() > 0) {
-      Simulation.getInstance().decreaseTurn();
+    Simulation sim = Simulation.getInstance();
+    if (sim.getTurn() <= sim.getTimesToRun()) {
+      sim.nextTurn();
       conditionChanged();
     }
   }

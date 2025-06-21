@@ -65,8 +65,4 @@ public class Tower {
     System.out.println(message);
   }
 
-  public void publishInitialConditions() {
-    conditionChanged();
-  }
-
 }
