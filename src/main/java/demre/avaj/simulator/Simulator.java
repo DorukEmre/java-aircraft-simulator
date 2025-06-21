@@ -3,7 +3,8 @@ package demre.avaj.simulator;
 import java.io.File;
 import java.io.BufferedReader;
 import java.io.FileReader;
-
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -11,6 +12,8 @@ import demre.avaj.simulator.aircrafts.Simulation;
 import demre.avaj.simulator.customExceptions.InvalidScenarioException;
 
 public class Simulator {
+  private static File output;
+
   public static void main(String[] args) {
     try {
       if (args.length != 1)
@@ -20,6 +23,8 @@ public class Simulator {
 
       checkScenarioFile(scenarioFileName);
       System.out.println("File '" + scenarioFileName + "' checked successfully.\n");
+
+      output = new File("simulation.txt");
 
       Simulation sim = Simulation.getInstance(scenarioFileName);
       sim.runSimulation();
@@ -107,5 +112,13 @@ public class Simulator {
   public static void errorAndExit(String message) {
     System.out.println("\u001B[31mError:\u001B[0m " + message);
     System.exit(1);
+  }
+
+  public static void announce(String message) {
+    try (PrintWriter writer = new PrintWriter(new FileWriter(output, true))) {
+      writer.println(message);
+    } catch (IOException e) {
+      errorAndExit("Failed to write to output file: " + e.getMessage());
+    }
   }
 }

@@ -1,5 +1,7 @@
 package demre.avaj.simulator.aircrafts;
 
+import demre.avaj.simulator.Simulator;
+
 // class Helicopter
 // {
 // +Helicopter(long p_id, string p_name, Coordinates p_coordinate)
@@ -19,7 +21,7 @@ public class Helicopter extends Aircraft {
   public void updateConditions() {
     String currentWeather = weatherTower.getWeather(coordinates);
 
-    // announce(currentWeather + " at "
+    // Simulator.announce(currentWeather + " at "
     // + getCoordinates().getLongitude() + ","
     // + getCoordinates().getLatitude() + ","
     // + getCoordinates().getHeight()); // for debugging
@@ -31,27 +33,27 @@ public class Helicopter extends Aircraft {
     // ◦ SNOW - Height decreases with 12
 
     if (currentWeather.equals("SUN")) {
-      announce(getTag() + ": This is hot.");
+      Simulator.announce(getTag() + ": This is hot.");
       updateLongitude(10);
       updateHeight(2);
     } else if (currentWeather.equals("RAIN")) {
-      announce(getTag() + ": Heavy rain! Watch out for turbulence.");
+      Simulator.announce(getTag() + ": Heavy rain! Watch out for turbulence.");
       updateLongitude(5);
     } else if (currentWeather.equals("FOG")) {
-      announce(getTag() + ": The fog is thick. Navigating carefully.");
+      Simulator.announce(getTag() + ": The fog is thick. Navigating carefully.");
       updateLongitude(1);
     } else if (currentWeather.equals("SNOW")) {
-      announce(getTag() + ": My rotor is going to freeze!");
+      Simulator.announce(getTag() + ": My rotor is going to freeze!");
       updateHeight(-12);
     }
 
-    // announce("New coordinates: "
+    // Simulator.announce("New coordinates: "
     // + getCoordinates().getLongitude() + ","
     // + getCoordinates().getLatitude() + ","
     // + getCoordinates().getHeight() + "\n"); // for debugging
 
     if (coordinates.getHeight() <= 0) {
-      announce(getTag() + " landing.");
+      Simulator.announce(getTag() + " landing.");
       weatherTower.addToUnregisterQueue(this);
     }
 

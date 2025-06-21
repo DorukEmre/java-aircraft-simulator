@@ -4,6 +4,7 @@ import demre.avaj.simulator.aircrafts.Coordinates;
 import demre.avaj.simulator.aircrafts.Flyable;
 import demre.avaj.simulator.aircrafts.Simulation;
 import demre.avaj.simulator.weather.WeatherProvider;
+import demre.avaj.simulator.Simulator;
 
 // class WeatherTower
 // {
@@ -38,7 +39,7 @@ public class WeatherTower extends Tower {
   public void register(Flyable p_flyable) {
     // Tower says: Balloon#B1(1) registered to weather tower.
     super.register(p_flyable);
-    announce("Tower says: "
+    Simulator.announce("Tower says: "
         + p_flyable.getClass().getSimpleName()
         + "#" + p_flyable.getName()
         + "(" + p_flyable.getId() + ") registered to weather tower.");
@@ -48,7 +49,7 @@ public class WeatherTower extends Tower {
   public void addToUnregisterQueue(Flyable p_flyable) {
     // Tower says: Balloon#B1(1) unregistered from weather tower.
     super.addToUnregisterQueue(p_flyable);
-    announce("Tower says: "
+    Simulator.announce("Tower says: "
         + p_flyable.getClass().getSimpleName()
         + "#" + p_flyable.getName()
         + "(" + p_flyable.getId() + ") unregistered from weather tower.");

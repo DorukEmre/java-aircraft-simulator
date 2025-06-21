@@ -33,10 +33,6 @@ public abstract class Flyable {
 
   public abstract Coordinates getCoordinates();
 
-  protected void announce(String message) {
-    System.out.println(message);
-  }
-
   protected abstract void updateLongitude(int change);
 
   protected abstract void updateLatitude(int change);
