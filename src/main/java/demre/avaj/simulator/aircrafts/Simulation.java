@@ -118,7 +118,7 @@ public class Simulation {
     System.out.println("Aircrafts loaded: " + aircrafts.size());
     for (Flyable aircraft : aircrafts) {
       System.out.println(
-          aircraft.getClass() + "\t"
+          aircraft.getClass().getSimpleName() + "\t"
               + aircraft.getName() + "(" + aircraft.getId() + ") "
               + aircraft.getCoordinates().getLongitude() + " "
               + aircraft.getCoordinates().getLatitude() + " "

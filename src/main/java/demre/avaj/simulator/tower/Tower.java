@@ -49,4 +49,8 @@ public class Tower {
     return observers;
   }
 
+  protected void announce(String message) {
+    System.out.println(message);
+  }
+
 }
