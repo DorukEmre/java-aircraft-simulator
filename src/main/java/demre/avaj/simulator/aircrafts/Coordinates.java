@@ -24,15 +24,27 @@ public class Coordinates {
   }
 
   public int getLongitude() {
-    return this.longitude;
+    return longitude;
   }
 
   public int getLatitude() {
-    return this.latitute;
+    return latitute;
   }
 
   public int getHeight() {
-    return this.height;
+    return height;
+  }
+
+  public void setLongitude(int p_longitude) {
+    this.longitude = p_longitude;
+  }
+
+  public void setLatitude(int p_latitude) {
+    this.latitute = p_latitude;
+  }
+
+  public void setHeight(int p_height) {
+    this.height = p_height;
   }
 
 }
