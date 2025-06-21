@@ -44,9 +44,9 @@ public class WeatherTower extends Tower {
   }
 
   @Override
-  public void unregister(Flyable p_flyable) {
+  public void addToUnregisterQueue(Flyable p_flyable) {
     // Tower says: Balloon#B1(1) unregistered from weather tower.
-    super.unregister(p_flyable);
+    super.addToUnregisterQueue(p_flyable);
     announce("Tower says: "
         + p_flyable.getClass().getSimpleName()
         + "#" + p_flyable.getName()

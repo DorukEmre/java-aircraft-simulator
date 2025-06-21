@@ -99,8 +99,11 @@ public class Simulation {
           int longitude = Integer.parseInt(components[2]);
           int latitude = Integer.parseInt(components[3]);
           int height = Integer.parseInt(components[4]);
-          if (height > 100)
+          if (height > 100) {
             height = 100;
+          } else if (height < 0) {
+            height = 0;
+          }
           Coordinates coord = new Coordinates(longitude, latitude, height);
 
           // Factory creates new flyable aircraft
@@ -138,7 +141,9 @@ public class Simulation {
     }
 
     System.out.println("Aircrafts registered with tower: "
-        + weatherTower.getObservers().size());
-  };
+        + weatherTower.getObservers().size() + "\n");
 
+    // Announce initial conditions for each aircraft
+    weatherTower.publishInitialConditions();
+  };
 }

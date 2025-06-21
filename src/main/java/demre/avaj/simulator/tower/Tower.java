@@ -18,9 +18,11 @@ import demre.avaj.simulator.aircrafts.Flyable;
 
 public class Tower {
   private List<Flyable> observers;
+  private List<Flyable> observersToUnregister;
 
   Tower() {
     this.observers = new ArrayList<Flyable>();
+    this.observersToUnregister = new ArrayList<Flyable>();
   }
 
   // == addObserver()
@@ -40,10 +42,20 @@ public class Tower {
       for (Flyable observer : observers) {
         observer.updateConditions();
       }
+      processUnregisterQueue();
     }
   }
 
-  // Getter
+  public void addToUnregisterQueue(Flyable p_flyable) {
+    observersToUnregister.add(p_flyable);
+  }
+
+  private void processUnregisterQueue() {
+    for (Flyable observer : observersToUnregister) {
+      unregister(observer);
+    }
+    observersToUnregister.clear();
+  }
 
   public List<Flyable> getObservers() {
     return observers;
@@ -51,6 +63,10 @@ public class Tower {
 
   protected void announce(String message) {
     System.out.println(message);
+  }
+
+  public void publishInitialConditions() {
+    conditionChanged();
   }
 
 }
