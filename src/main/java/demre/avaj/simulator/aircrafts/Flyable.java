@@ -22,6 +22,7 @@ public abstract class Flyable {
 
   // puml doesn't specify return type
   public void registerTower(WeatherTower p_tower) {
+    p_tower.register(this);
   }
 
   // Additional functions

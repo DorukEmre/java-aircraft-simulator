@@ -94,7 +94,8 @@ public class Simulator {
               && !type.equals("JetPlane")
               && !type.equals("Helicopter"))
               || (longitude <= 0 || latitude <= 0)
-              || (height < 1)) {
+          // || (height < 1)
+          ) {
             throw new InvalidScenarioException();
           }
 

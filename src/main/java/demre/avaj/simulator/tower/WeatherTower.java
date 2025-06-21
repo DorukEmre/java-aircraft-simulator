@@ -14,7 +14,7 @@ import demre.avaj.simulator.weather.WeatherProvider;
 
 public class WeatherTower extends Tower {
   // Constructor
-  WeatherTower() {
+  public WeatherTower() {
     super();
   }
 

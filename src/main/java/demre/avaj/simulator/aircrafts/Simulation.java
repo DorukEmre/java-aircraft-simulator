@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import demre.avaj.simulator.factory.AircraftFactory;
+import demre.avaj.simulator.tower.WeatherTower;
 import demre.avaj.simulator.weather.WeatherProvider;
 import static demre.avaj.simulator.Simulator.errorAndExit;
 
@@ -17,15 +18,17 @@ public class Simulation {
   private int turn; // number of times the simulation will run
   private int simulationSeed; // random number used as seed
 
-  ArrayList<Flyable> aircrafts; // array of all aircrafts
-  AircraftFactory factory; // singleton
-  WeatherProvider weatherProvider; // singleton
+  private ArrayList<Flyable> aircrafts; // array of all aircrafts
+  private AircraftFactory factory; // singleton
+  private WeatherProvider weatherProvider; // singleton
+  private WeatherTower weatherTower;
 
   // Constructor
   private Simulation(String scenarioFileName) throws IOException {
     this.aircrafts = new ArrayList<>();
     this.factory = AircraftFactory.getInstance();
     this.weatherProvider = WeatherProvider.getInstance();
+    this.weatherTower = new WeatherTower();
 
     // Each simulation gets a random seed number
     Random random = new Random();
@@ -92,10 +95,12 @@ public class Simulation {
 
           String type = components[0];
           String name = components[1];
+
           int longitude = Integer.parseInt(components[2]);
           int latitude = Integer.parseInt(components[3]);
           int height = Integer.parseInt(components[4]);
-
+          if (height > 100)
+            height = 100;
           Coordinates coord = new Coordinates(longitude, latitude, height);
 
           // Factory creates new flyable aircraft
@@ -119,12 +124,21 @@ public class Simulation {
               + aircraft.getCoordinates().getLatitude() + " "
               + aircraft.getCoordinates().getHeight() + "\t"
               + WeatherProvider.getInstance().getCurrentWeather(aircraft.getCoordinates()));
-      // Coordinates coords = aircraft.getCoordinates();
-      // System.out.println("Coordinates: Longitude: " + coords.getLongitude() +
-      // ", Latitude: " + coords.getLatitude() +
-      // ", Height: " + coords.getHeight());
     }
 
+    System.out.println("Aircrafts registered with tower: "
+        + weatherTower.getObservers().size());
+
+    for (Flyable aircraft : aircrafts) {
+      // Aircraft (observer) is registered with weatherTower (subject)
+      // Only register aircrafts with height > 0
+      if (aircraft.getCoordinates().getHeight() > 0) {
+        aircraft.registerTower(weatherTower);
+      }
+    }
+
+    System.out.println("Aircrafts registered with tower: "
+        + weatherTower.getObservers().size());
   };
 
 }
