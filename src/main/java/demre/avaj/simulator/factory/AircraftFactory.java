@@ -10,9 +10,11 @@ import demre.avaj.simulator.aircrafts.*;
 public class AircraftFactory {
   // Static instance of the singleton
   private static AircraftFactory instance;
+  private long maxId; // Current max aircraft unique ID
 
   // Private constructor to prevent instantiation
   private AircraftFactory() {
+    this.maxId = 0;
   }
 
   // Public method to provide access to the singleton instance
@@ -23,9 +25,21 @@ public class AircraftFactory {
     return instance;
   }
 
+  // Getters - Setters
+
+  private long getMaxId() {
+    return maxId;
+  }
+
+  private void setMaxId(long id) {
+    maxId = maxId + 1;
+  }
+
+  // Member functions
+
   public Flyable newAircraft(String p_type, String p_name, Coordinates p_coordinates) {
     Flyable flyable;
-    long id = 1; // Set unique ID
+    long id = getMaxId() + 1;
 
     if (p_type.equals("Helicopter")) {
       flyable = new Helicopter(id, p_name, p_coordinates);
@@ -36,6 +50,8 @@ public class AircraftFactory {
     } else {
       throw new IllegalArgumentException("Unknown aircraft type: " + p_type);
     }
+
+    setMaxId(id);
 
     return flyable;
   }

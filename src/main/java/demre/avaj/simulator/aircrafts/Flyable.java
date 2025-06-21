@@ -24,6 +24,11 @@ public abstract class Flyable {
   public void registerTower(WeatherTower p_tower) {
   }
 
-  // Additional member functions
+  // Additional functions
   public abstract String getName();
+
+  public abstract long getId();
+
+  public abstract Coordinates getCoordinates();
+
 }

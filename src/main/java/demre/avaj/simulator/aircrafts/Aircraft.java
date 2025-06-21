@@ -27,4 +27,12 @@ public class Aircraft extends Flyable {
   public String getName() {
     return name;
   }
+
+  public long getId() {
+    return id;
+  }
+
+  public Coordinates getCoordinates() {
+    return coordinates;
+  }
 }

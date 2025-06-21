@@ -110,9 +110,15 @@ public class Simulation {
 
   public void runSimulation() {
 
-    System.out.println("aircrafts.size: " + aircrafts.size());
+    System.out.println("Aircrafts loaded: " + aircrafts.size());
     for (Flyable aircraft : aircrafts) {
-      System.out.println(aircraft.getClass() + " " + aircraft.getName());
+      System.out.println(
+          aircraft.getClass() + "\t"
+              + aircraft.getName() + "(" + aircraft.getId() + ") "
+              + aircraft.getCoordinates().getLongitude() + " "
+              + aircraft.getCoordinates().getLatitude() + " "
+              + aircraft.getCoordinates().getHeight() + "\t"
+              + WeatherProvider.getInstance().getCurrentWeather(aircraft.getCoordinates()));
       // Coordinates coords = aircraft.getCoordinates();
       // System.out.println("Coordinates: Longitude: " + coords.getLongitude() +
       // ", Latitude: " + coords.getLatitude() +
