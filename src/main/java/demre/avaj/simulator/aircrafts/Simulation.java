@@ -10,7 +10,7 @@ import java.util.Random;
 
 import demre.avaj.simulator.factory.AircraftFactory;
 import demre.avaj.simulator.tower.WeatherTower;
-import demre.avaj.simulator.weather.WeatherProvider;
+// import demre.avaj.simulator.weather.WeatherProvider;
 import static demre.avaj.simulator.Simulator.errorAndExit;
 
 public class Simulation {
@@ -19,7 +19,7 @@ public class Simulation {
   private PrintWriter writer; // to print to file
 
   private int timesToRun; // number of times the simulation will run
-  private int currentTurn; // number of times the simulation will run
+  private int currentTurn; // current turn
   private int simulationSeed; // random number used as seed
 
   private ArrayList<Flyable> aircrafts; // array of all aircrafts
@@ -85,8 +85,10 @@ public class Simulation {
 
   private void parseScenario(String scenarioFileName) throws IOException {
     File scenarioFile = new File(scenarioFileName);
+
     try (FileReader fr = new FileReader(scenarioFile);
         BufferedReader br = new BufferedReader(fr)) {
+
       AircraftFactory factory = AircraftFactory.getInstance();
       String line;
       boolean firstLine = true;
@@ -146,7 +148,8 @@ public class Simulation {
     }
 
     while (getTurn() <= getTimesToRun()) {
-      // System.out.println("turn: " + getTurn() + ", registered aircrafts: " +
+      // System.out.println(
+      // "\u001B[31mTurn:\u001B[0m " + getTurn() + ", registered aircrafts: " +
       // weatherTower.getObservers().size());
       weatherTower.changeWeather();
     }

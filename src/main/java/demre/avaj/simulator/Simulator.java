@@ -21,7 +21,8 @@ public class Simulator {
       String scenarioFileName = args[0];
 
       checkScenarioFile(scenarioFileName);
-      System.out.println("File '" + scenarioFileName + "' checked successfully.\n");
+      // System.out.println("File '" + scenarioFileName + "' checked
+      // successfully.\n");
 
       // Create/check output file
       File output = new File("simulation.txt");
@@ -65,11 +66,12 @@ public class Simulator {
 
     try (FileReader fr = new FileReader(scenarioFile);
         BufferedReader br = new BufferedReader(fr)) {
+
       String line;
       boolean firstLine = true;
 
       while ((line = br.readLine()) != null) {
-        System.out.println(line);
+        // System.out.println(line);
 
         if (firstLine) {
           firstLine = false;
@@ -92,12 +94,12 @@ public class Simulator {
           // Check component validity
           String type = components[0];
           // String name = components[1];
-          int longitude, latitude, height;
+          int longitude, latitude; // , height;
 
           try {
             longitude = Integer.parseInt(components[2]);
             latitude = Integer.parseInt(components[3]);
-            height = Integer.parseInt(components[4]);
+            // height = Integer.parseInt(components[4]);
           } catch (NumberFormatException e) {
             throw new InvalidScenarioException("Longitude, latitude, and height must be valid integers.");
           }
