@@ -35,12 +35,15 @@ public class Helicopter extends Aircraft {
       sim.announce(getTag() + ": This is hot.");
       updateLongitude(10);
       updateHeight(2);
+
     } else if (currentWeather.equals("RAIN")) {
       sim.announce(getTag() + ": Heavy rain! Watch out for turbulence.");
       updateLongitude(5);
+
     } else if (currentWeather.equals("FOG")) {
       sim.announce(getTag() + ": The fog is thick. Navigating carefully.");
       updateLongitude(1);
+
     } else if (currentWeather.equals("SNOW")) {
       sim.announce(getTag() + ": My rotor is going to freeze!");
       updateHeight(-12);

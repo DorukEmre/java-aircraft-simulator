@@ -6,11 +6,12 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 
 import demre.avaj.simulator.aircrafts.Simulation;
 import demre.avaj.simulator.customExceptions.InvalidScenarioException;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class Simulator {
   public static void main(String[] args) {

@@ -1,5 +1,7 @@
 package demre.avaj.simulator.aircrafts;
 
+import static demre.avaj.simulator.Simulator.errorAndExit;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -10,8 +12,6 @@ import java.util.Random;
 
 import demre.avaj.simulator.factory.AircraftFactory;
 import demre.avaj.simulator.tower.WeatherTower;
-// import demre.avaj.simulator.weather.WeatherProvider;
-import static demre.avaj.simulator.Simulator.errorAndExit;
 
 public class Simulation {
   private static Simulation instance; // singleton

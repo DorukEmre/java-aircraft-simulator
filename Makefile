@@ -13,13 +13,16 @@ compile:
 	@printf "%s\n" $(SOURCES) > $(TARGET)
 	@echo "$$(wc -l < $(TARGET)) files copied to $(TARGET)"
 	@mkdir -p $(BIN_DIR)
-	@echo "javac compiles Java source:"
+	@echo "Compiling Java sources:"
 	javac -d $(BIN_DIR) @sources.txt
 
 run:
+	@echo "Running the Java simulator:"
 	java -cp bin demre.avaj.simulator.Simulator scenario.txt
 
 clean:
 	rm -f $(TARGET)
 	rm -f $(OUTPUT)
 	rm -rf $(BIN_DIR)
+	find . -name "*.class" -type f -delete
+

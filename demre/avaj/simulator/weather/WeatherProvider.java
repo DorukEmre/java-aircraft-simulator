@@ -1,10 +1,9 @@
 package demre.avaj.simulator.weather;
 
-import demre.avaj.simulator.aircrafts.Simulation;
-
 import java.util.Random;
 
 import demre.avaj.simulator.aircrafts.Coordinates;
+import demre.avaj.simulator.aircrafts.Simulation;
 
 // class WeatherProvider <<Singleton>>
 // {
