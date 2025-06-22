@@ -1,7 +1,5 @@
 package demre.avaj.simulator.aircrafts;
 
-import demre.avaj.simulator.Simulator;
-
 // class Baloon
 // {
 // +Baloon(long p_id, string p_name, Coordinates p_coordinate)
@@ -19,9 +17,10 @@ public class Baloon extends Aircraft {
 
   @Override
   public void updateConditions() {
+    Simulation sim = Simulation.getInstance();
     String currentWeather = weatherTower.getWeather(coordinates);
 
-    // Simulator.announce(currentWeather + " at "
+    // sim.announce(currentWeather + " at "
     // + getCoordinates().getLongitude() + ","
     // + getCoordinates().getLatitude() + ","
     // + getCoordinates().getHeight()); // for debugging
@@ -33,27 +32,27 @@ public class Baloon extends Aircraft {
     // ◦ SNOW - Height decreases with 15
 
     if (currentWeather.equals("SUN")) {
-      Simulator.announce(getTag() + ": Let's enjoy the good weather and take some pics.");
+      sim.announce(getTag() + ": Let's enjoy the good weather and take some pics.");
       updateLongitude(2);
       updateHeight(4);
     } else if (currentWeather.equals("RAIN")) {
-      Simulator.announce(getTag() + ": Damn you rain! You messed up my balloon.");
+      sim.announce(getTag() + ": Damn you rain! You messed up my balloon.");
       updateHeight(-5);
     } else if (currentWeather.equals("FOG")) {
-      Simulator.announce(getTag() + ": Can't see anything! We're flying blind.");
+      sim.announce(getTag() + ": Can't see anything! We're flying blind.");
       updateHeight(-3);
     } else if (currentWeather.equals("SNOW")) {
-      Simulator.announce(getTag() + ": It's snowing. We're gonna crash.");
+      sim.announce(getTag() + ": It's snowing. We're gonna crash.");
       updateHeight(-15);
     }
 
-    // Simulator.announce("New coordinates: "
+    // sim.announce("New coordinates: "
     // + getCoordinates().getLongitude() + ","
     // + getCoordinates().getLatitude() + ","
     // + getCoordinates().getHeight() + "\n"); // for debugging
 
     if (coordinates.getHeight() <= 0) {
-      Simulator.announce(getTag() + " landing.");
+      sim.announce(getTag() + " landing.");
       weatherTower.addToUnregisterQueue(this);
     }
 

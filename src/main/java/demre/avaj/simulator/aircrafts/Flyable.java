@@ -20,13 +20,13 @@ public abstract class Flyable {
   // whenever there is a change.
   public abstract void updateConditions();
 
-  // puml doesn't specify return type
   public void registerTower(WeatherTower p_tower) {
     this.weatherTower = p_tower;
     p_tower.register(this);
   }
 
   // Additional functions
+
   public abstract String getName();
 
   public abstract long getId();

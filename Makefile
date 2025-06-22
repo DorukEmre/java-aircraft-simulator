@@ -4,6 +4,7 @@ NAME		= avaj_launcher
 
 SOURCES	= $(shell find * -name "*.java")
 TARGET	= sources.txt
+OUTPUT	= simulation.txt
 BIN_DIR	= bin
 
 all: compile run
@@ -20,4 +21,5 @@ run:
 
 clean:
 	rm -f $(TARGET)
+	rm -f $(OUTPUT)
 	rm -rf $(BIN_DIR)

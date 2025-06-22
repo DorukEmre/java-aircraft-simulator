@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -15,6 +16,8 @@ import static demre.avaj.simulator.Simulator.errorAndExit;
 public class Simulation {
   private static Simulation instance; // singleton
 
+  private PrintWriter writer; // to print to file
+
   private int timesToRun; // number of times the simulation will run
   private int currentTurn; // number of times the simulation will run
   private int simulationSeed; // random number used as seed
@@ -22,12 +25,14 @@ public class Simulation {
   private ArrayList<Flyable> aircrafts; // array of all aircrafts
   private WeatherTower weatherTower;
 
-  // Constructor
-  private Simulation(String scenarioFileName) throws IOException {
+  // Constructor //
+
+  private Simulation(String scenarioFileName, PrintWriter p_writer) throws IOException {
     this.aircrafts = new ArrayList<>();
     // this.weatherProvider = WeatherProvider.getInstance();
     this.weatherTower = new WeatherTower();
     this.currentTurn = 1;
+    this.writer = p_writer;
 
     // Each simulation gets a random seed number
     Random random = new Random();
@@ -50,9 +55,9 @@ public class Simulation {
     return simulationSeed;
   }
 
-  public static Simulation getInstance(String scenarioFileName) throws IOException {
+  public static Simulation getInstance(String scenarioFileName, PrintWriter p_writer) throws IOException {
     if (instance == null && !scenarioFileName.isEmpty()) {
-      instance = new Simulation(scenarioFileName);
+      instance = new Simulation(scenarioFileName, p_writer);
     } else if (instance == null) {
       errorAndExit("Simulation instantiation failed.");
     }
@@ -66,7 +71,7 @@ public class Simulation {
     return instance;
   }
 
-  // Setters
+  // Setters //
 
   private void setTimesToRun(int num) {
     timesToRun = num;
@@ -85,8 +90,6 @@ public class Simulation {
       AircraftFactory factory = AircraftFactory.getInstance();
       String line;
       boolean firstLine = true;
-
-      System.out.println(getSimulationSeed());
 
       while ((line = br.readLine()) != null) {
 
@@ -148,4 +151,13 @@ public class Simulation {
       weatherTower.changeWeather();
     }
   };
+
+  public void announce(String message) {
+    if (writer == null) {
+      System.err.println("Writer is null!");
+      return;
+    }
+    writer.println(message);
+    // System.out.println(message);
+  }
 }

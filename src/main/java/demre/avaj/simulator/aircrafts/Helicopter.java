@@ -1,7 +1,5 @@
 package demre.avaj.simulator.aircrafts;
 
-import demre.avaj.simulator.Simulator;
-
 // class Helicopter
 // {
 // +Helicopter(long p_id, string p_name, Coordinates p_coordinate)
@@ -19,9 +17,10 @@ public class Helicopter extends Aircraft {
 
   @Override
   public void updateConditions() {
+    Simulation sim = Simulation.getInstance();
     String currentWeather = weatherTower.getWeather(coordinates);
 
-    // Simulator.announce(currentWeather + " at "
+    // sim.announce(currentWeather + " at "
     // + getCoordinates().getLongitude() + ","
     // + getCoordinates().getLatitude() + ","
     // + getCoordinates().getHeight()); // for debugging
@@ -33,27 +32,27 @@ public class Helicopter extends Aircraft {
     // ◦ SNOW - Height decreases with 12
 
     if (currentWeather.equals("SUN")) {
-      Simulator.announce(getTag() + ": This is hot.");
+      sim.announce(getTag() + ": This is hot.");
       updateLongitude(10);
       updateHeight(2);
     } else if (currentWeather.equals("RAIN")) {
-      Simulator.announce(getTag() + ": Heavy rain! Watch out for turbulence.");
+      sim.announce(getTag() + ": Heavy rain! Watch out for turbulence.");
       updateLongitude(5);
     } else if (currentWeather.equals("FOG")) {
-      Simulator.announce(getTag() + ": The fog is thick. Navigating carefully.");
+      sim.announce(getTag() + ": The fog is thick. Navigating carefully.");
       updateLongitude(1);
     } else if (currentWeather.equals("SNOW")) {
-      Simulator.announce(getTag() + ": My rotor is going to freeze!");
+      sim.announce(getTag() + ": My rotor is going to freeze!");
       updateHeight(-12);
     }
 
-    // Simulator.announce("New coordinates: "
+    // sim.announce("New coordinates: "
     // + getCoordinates().getLongitude() + ","
     // + getCoordinates().getLatitude() + ","
     // + getCoordinates().getHeight() + "\n"); // for debugging
 
     if (coordinates.getHeight() <= 0) {
-      Simulator.announce(getTag() + " landing.");
+      sim.announce(getTag() + " landing.");
       weatherTower.addToUnregisterQueue(this);
     }
 

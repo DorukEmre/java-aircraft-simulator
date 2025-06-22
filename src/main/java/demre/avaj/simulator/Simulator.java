@@ -2,6 +2,7 @@ package demre.avaj.simulator;
 
 import java.io.File;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
@@ -12,8 +13,6 @@ import demre.avaj.simulator.aircrafts.Simulation;
 import demre.avaj.simulator.customExceptions.InvalidScenarioException;
 
 public class Simulator {
-  private static File output;
-
   public static void main(String[] args) {
     try {
       if (args.length != 1)
@@ -24,13 +23,21 @@ public class Simulator {
       checkScenarioFile(scenarioFileName);
       System.out.println("File '" + scenarioFileName + "' checked successfully.\n");
 
-      output = new File("simulation.txt");
+      // Create/check output file
+      File output = new File("simulation.txt");
+      if ((!output.exists() && !output.createNewFile()) || !output.canWrite())
+        errorAndExit("Failed to create output file");
 
-      Simulation sim = Simulation.getInstance(scenarioFileName);
-      sim.runSimulation();
+      try (
+          FileWriter fileWriter = new FileWriter(output, false);
+          PrintWriter writer = new PrintWriter(new BufferedWriter(fileWriter), true)) {
+        Simulation sim = Simulation.getInstance(scenarioFileName, writer);
+        sim.runSimulation();
+      }
 
     } catch (Exception e) {
       errorAndExit(e.getMessage());
+      // e.printStackTrace();
 
       // } catch (Error err) {
       // errorAndExit(err.getMessage());
@@ -114,11 +121,4 @@ public class Simulator {
     System.exit(1);
   }
 
-  public static void announce(String message) {
-    try (PrintWriter writer = new PrintWriter(new FileWriter(output, true))) {
-      writer.println(message);
-    } catch (IOException e) {
-      errorAndExit("Failed to write to output file: " + e.getMessage());
-    }
-  }
 }

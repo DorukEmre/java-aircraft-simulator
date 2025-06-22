@@ -39,7 +39,7 @@ public class WeatherTower extends Tower {
   public void register(Flyable p_flyable) {
     // Tower says: Balloon#B1(1) registered to weather tower.
     super.register(p_flyable);
-    Simulator.announce("Tower says: "
+    Simulation.getInstance().announce("Tower says: "
         + p_flyable.getClass().getSimpleName()
         + "#" + p_flyable.getName()
         + "(" + p_flyable.getId() + ") registered to weather tower.");
@@ -49,7 +49,7 @@ public class WeatherTower extends Tower {
   public void addToUnregisterQueue(Flyable p_flyable) {
     // Tower says: Balloon#B1(1) unregistered from weather tower.
     super.addToUnregisterQueue(p_flyable);
-    Simulator.announce("Tower says: "
+    Simulation.getInstance().announce("Tower says: "
         + p_flyable.getClass().getSimpleName()
         + "#" + p_flyable.getName()
         + "(" + p_flyable.getId() + ") unregistered from weather tower.");
