@@ -26,3 +26,4 @@ clean:
 	rm -rf $(BIN_DIR)
 	find . -name "*.class" -type f -delete
 
+re: clean all
