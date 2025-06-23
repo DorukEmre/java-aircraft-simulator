@@ -11,6 +11,8 @@ import java.util.Random;
 import demre.avaj.simulator.factory.AircraftFactory;
 import demre.avaj.simulator.tower.WeatherTower;
 
+import demre.avaj.simulator.exceptions.SimulationException;
+
 /**
  * Manages the simulation of aircraft and weather interactions.
  * Handles scenario parsing, aircraft registration, and simulation turns.
@@ -58,17 +60,26 @@ public class Simulation {
   }
 
   public static Simulation getInstance(String scenarioFileName, PrintWriter p_writer) throws IOException {
-    if (instance == null && !scenarioFileName.isEmpty() && p_writer != null) {
-      instance = new Simulation(scenarioFileName, p_writer);
-    } else if (instance == null) {
-      throw new IllegalArgumentException("Simulation instantiation failed.");
+    try {
+      if (instance == null && !scenarioFileName.isEmpty() && p_writer != null) {
+        instance = new Simulation(scenarioFileName, p_writer);
+      } else if (instance == null) {
+        throw new IllegalArgumentException("Simulation instantiation failed.");
+      }
+
+    } catch (Exception e) {
+      throw new SimulationException(e.getMessage(), e);
     }
     return instance;
   }
 
   public static Simulation getInstance() {
-    if (instance == null) {
-      throw new IllegalStateException("Simulation not yet instantiated.");
+    try {
+      if (instance == null) {
+        throw new IllegalStateException("Simulation not yet instantiated.");
+      }
+    } catch (Exception e) {
+      throw new SimulationException(e.getMessage(), e);
     }
     return instance;
   }
@@ -140,27 +151,14 @@ public class Simulation {
    * and each registered aircraft reacts to the weather.
    */
   public void runSimulation() {
-
-    // System.out.println("Aircrafts loaded: " + aircrafts.size());
-    // for (Flyable aircraft : aircrafts) {
-    // System.out.println(
-    // aircraft.getClass().getSimpleName() + "\t"
-    // + aircraft.getName() + "(" + aircraft.getId() + ") "
-    // + aircraft.getCoordinates().getLongitude() + " "
-    // + aircraft.getCoordinates().getLatitude() + " "
-    // + aircraft.getCoordinates().getHeight() + "\t"
-    // +
-    // WeatherProvider.getInstance().getCurrentWeather(aircraft.getCoordinates()));
-    // }
-
+    // Register Aircrafts (observer) with weatherTower (subject)
     for (Flyable aircraft : aircrafts) {
-      // Register Aircrafts (observer) with weatherTower (subject)
-      // Only register aircrafts with height > 0
       if (aircraft.getCoordinates().getHeight() > 0) {
         aircraft.registerTower(weatherTower);
       }
     }
 
+    // Loop and change the weather for each turn
     while (getTurn() <= getTimesToRun()) {
       // System.out.println(
       // "\u001B[31mTurn:\u001B[0m " + getTurn() + ", registered aircrafts: " +

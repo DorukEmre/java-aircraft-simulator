@@ -8,7 +8,7 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 
 import demre.avaj.simulator.aircrafts.Simulation;
-import demre.avaj.simulator.customExceptions.InvalidScenarioException;
+import demre.avaj.simulator.exceptions.InvalidScenarioException;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -19,17 +19,16 @@ public class Simulator {
       if (args.length != 1)
         throw new IllegalArgumentException("Wrong number of arguments.");
 
+      // Check if the scenario file is valid
       String scenarioFileName = args[0];
-
       checkScenarioFile(scenarioFileName);
-      // System.out.println("File '" + scenarioFileName + "' checked
-      // successfully.\n");
 
       // Create/check output file
       File output = new File("simulation.txt");
       if ((!output.exists() && !output.createNewFile()) || !output.canWrite())
         throw new IOException("Failed to create output file.");
 
+      // Run the simulation
       try (
           FileWriter fileWriter = new FileWriter(output, false);
           PrintWriter writer = new PrintWriter(new BufferedWriter(fileWriter), true)) {
@@ -83,7 +82,6 @@ public class Simulator {
       boolean firstLine = true;
 
       while ((line = br.readLine()) != null) {
-        // System.out.println(line);
 
         if (firstLine) {
           firstLine = false;
