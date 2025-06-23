@@ -28,7 +28,7 @@ public class Simulator {
       // Create/check output file
       File output = new File("simulation.txt");
       if ((!output.exists() && !output.createNewFile()) || !output.canWrite())
-        errorAndExit("Failed to create output file");
+        throw new IOException("Failed to create output file.");
 
       try (
           FileWriter fileWriter = new FileWriter(output, false);
@@ -38,10 +38,8 @@ public class Simulator {
       }
 
     } catch (Exception e) {
-      errorAndExit(e.getMessage());
+      errorAndExit(e, e.getMessage());
 
-      // } catch (Error err) {
-      // errorAndExit(err.getMessage());
     }
     System.exit(0);
   }
@@ -60,7 +58,8 @@ public class Simulator {
 
     if (!scenarioFile.exists() || !scenarioFile.isFile()) {
       throw new FileNotFoundException(
-          "File '" + scenarioFileName + "' does not exist or is not a valid file.");
+          "File '" + scenarioFileName +
+              "' does not exist or is not a valid file.");
     }
 
     checkScenarioFileContent(scenarioFile);
@@ -94,7 +93,7 @@ public class Simulator {
               throw new InvalidScenarioException("The first line must be a positive integer.");
             }
           } catch (NumberFormatException e) {
-            throw new InvalidScenarioException("The first line must be a valid integer.");
+            throw new InvalidScenarioException("The first line must be a valid integer.", e);
           }
 
         } else {
@@ -107,14 +106,14 @@ public class Simulator {
           // Check component validity
           String type = components[0];
           // String name = components[1];
-          int longitude, latitude; // , height;
+          int longitude, latitude, height;
 
           try {
             longitude = Integer.parseInt(components[2]);
             latitude = Integer.parseInt(components[3]);
-            // height = Integer.parseInt(components[4]);
+            height = Integer.parseInt(components[4]);
           } catch (NumberFormatException e) {
-            throw new InvalidScenarioException("Longitude, latitude, and height must be valid integers.");
+            throw new InvalidScenarioException("Longitude, latitude, and height must be valid integers.", e);
           }
 
           if ((!type.equals("Baloon")
@@ -136,7 +135,8 @@ public class Simulator {
    * 
    * @param message the error message to print
    */
-  private static void errorAndExit(String message) {
+  private static void errorAndExit(Exception e, String message) {
+    // e.printStackTrace();
     System.out.println("\u001B[31mError:\u001B[0m " + message);
     System.exit(1);
   }
