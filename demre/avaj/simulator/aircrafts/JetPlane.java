@@ -1,11 +1,9 @@
 package demre.avaj.simulator.aircrafts;
 
-// class JetPlane
-// {
-// +JetPlane(long p_id, string p_name, Coordinates p_coordinate)
-// +void updateConditions()
-// }
-
+/**
+ * Represents a jet plane in the simulation.
+ * Inherits from the Aircraft class and implements own specific behavior.
+ */
 public class JetPlane extends Aircraft {
 
   public JetPlane(long p_id, String p_name, Coordinates p_coordinate) {
@@ -15,6 +13,14 @@ public class JetPlane extends Aircraft {
         + "(" + p_id + ")";
   }
 
+  /**
+   * Updates coordinates of the helicopter based on the current weather:
+   * - SUN: Increases latitude by 10 and height by 2.
+   * - RAIN: Increases latitude by 5.
+   * - FOG: Increases latitude by 1.
+   * - SNOW: Decreases height by 7.
+   * Lands if height drops to 0 or below, and unregisters from tower.
+   */
   @Override
   public void updateConditions() {
     Simulation sim = Simulation.getInstance();
@@ -25,22 +31,20 @@ public class JetPlane extends Aircraft {
     // + getCoordinates().getLatitude() + ","
     // + getCoordinates().getHeight()); // for debugging
 
-    // • JetPlane:
-    // ◦ SUN - Latitude increases with 10, Height increases with 2
-    // ◦ RAIN - Latitude increases with 5
-    // ◦ FOG - Latitude increases with 1
-    // ◦ SNOW - Height decreases with 7
-
     if (currentWeather.equals("SUN")) {
       sim.announce(getTag() + ": Clear skies ahead. Perfect for flying.");
       updateLatitude(10);
       updateHeight(2);
+
     } else if (currentWeather.equals("RAIN")) {
-      sim.announce(getTag() + ": It's raining. Better watch out for lightings.");
+      sim.announce(getTag()
+          + ": It's raining. Better watch out for lightings.");
       updateLatitude(5);
+
     } else if (currentWeather.equals("FOG")) {
       sim.announce(getTag() + ": Visibility is low. Proceeding with caution.");
       updateLatitude(1);
+
     } else if (currentWeather.equals("SNOW")) {
       sim.announce(getTag() + ": OMG! Winter is coming!");
       updateHeight(-7);

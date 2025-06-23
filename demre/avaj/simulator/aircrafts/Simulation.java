@@ -1,7 +1,5 @@
 package demre.avaj.simulator.aircrafts;
 
-import static demre.avaj.simulator.Simulator.errorAndExit;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -13,10 +11,14 @@ import java.util.Random;
 import demre.avaj.simulator.factory.AircraftFactory;
 import demre.avaj.simulator.tower.WeatherTower;
 
+/**
+ * Manages the simulation of aircraft and weather interactions.
+ * Handles scenario parsing, aircraft registration, and simulation turns.
+ */
 public class Simulation {
   private static Simulation instance; // singleton
 
-  private PrintWriter writer; // to print to file
+  private PrintWriter writer; // to print to output file
 
   private int timesToRun; // number of times the simulation will run
   private int currentTurn; // current turn
@@ -56,17 +58,17 @@ public class Simulation {
   }
 
   public static Simulation getInstance(String scenarioFileName, PrintWriter p_writer) throws IOException {
-    if (instance == null && !scenarioFileName.isEmpty()) {
+    if (instance == null && !scenarioFileName.isEmpty() && p_writer != null) {
       instance = new Simulation(scenarioFileName, p_writer);
     } else if (instance == null) {
-      errorAndExit("Simulation instantiation failed.");
+      throw new IllegalArgumentException("Simulation instantiation failed.");
     }
     return instance;
   }
 
   public static Simulation getInstance() {
     if (instance == null) {
-      errorAndExit("Simulation not instantiated.");
+      throw new IllegalStateException("Simulation not yet instantiated.");
     }
     return instance;
   }
@@ -83,6 +85,13 @@ public class Simulation {
 
   // Member functions //
 
+  /**
+   * Parses the scenario file, and initialises times to run the simulation
+   * and all flyable aircrafts.
+   * 
+   * @param scenarioFileName the path to the scenario file
+   * @throws IOException if the file cannot be read
+   */
   private void parseScenario(String scenarioFileName) throws IOException {
     File scenarioFile = new File(scenarioFileName);
 
@@ -125,6 +134,11 @@ public class Simulation {
     }
   };
 
+  /**
+   * Runs the simulation for the specified number of turns.
+   * Each turn, the weather tower changes the weather,
+   * and each registered aircraft reacts to the weather.
+   */
   public void runSimulation() {
 
     // System.out.println("Aircrafts loaded: " + aircrafts.size());
@@ -140,7 +154,7 @@ public class Simulation {
     // }
 
     for (Flyable aircraft : aircrafts) {
-      // Aircraft (observer) is registered with weatherTower (subject)
+      // Register Aircrafts (observer) with weatherTower (subject)
       // Only register aircrafts with height > 0
       if (aircraft.getCoordinates().getHeight() > 0) {
         aircraft.registerTower(weatherTower);
@@ -155,10 +169,14 @@ public class Simulation {
     }
   };
 
+  /**
+   * Prints a message to the simulation output file.
+   * 
+   * @param message
+   */
   public void announce(String message) {
     if (writer == null) {
-      System.err.println("Writer is null!");
-      return;
+      throw new IllegalStateException("Simulation output writer is not set.");
     }
     writer.println(message);
     // System.out.println(message);

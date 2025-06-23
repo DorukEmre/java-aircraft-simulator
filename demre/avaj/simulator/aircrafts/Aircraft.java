@@ -1,18 +1,17 @@
 package demre.avaj.simulator.aircrafts;
 
-// class Aircraft
-// {
-// #long id
-// #string name
-// #Coordinate coordinates
-// #Aircraft(long p_id, string p_name, Coordinates p_coordinate)
-// }
-
+/**
+ * Represents a base class for all aircraft types in the simulation.
+ * This class extends Flyable and provides common properties and methods for all
+ * aircraft.
+ * It includes methods to update the aircraft's coordinates based on weather
+ * conditions.
+ */
 public class Aircraft extends Flyable {
   protected long id;
   protected String name;
-  protected Coordinates coordinates; // Coordinate(s)???
-  protected String tag; // ie: Balloon#B1(1)
+  protected Coordinates coordinates;
+  protected String tag; // Type#Name(Id), ie: Balloon#B1(1)
 
   protected Aircraft(long p_id, String p_name, Coordinates p_coordinate) {
     this.id = p_id;

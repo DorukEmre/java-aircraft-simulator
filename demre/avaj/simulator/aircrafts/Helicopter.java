@@ -1,11 +1,9 @@
 package demre.avaj.simulator.aircrafts;
 
-// class Helicopter
-// {
-// +Helicopter(long p_id, string p_name, Coordinates p_coordinate)
-// +void updateConditions()
-// }
-
+/**
+ * Represents a helicopter in the simulation.
+ * Inherits from the Aircraft class and implements own specific behavior.
+ */
 public class Helicopter extends Aircraft {
 
   public Helicopter(long p_id, String p_name, Coordinates p_coordinate) {
@@ -15,6 +13,14 @@ public class Helicopter extends Aircraft {
         + "(" + p_id + ")";
   }
 
+  /**
+   * Updates coordinates of the helicopter based on the current weather:
+   * - SUN: Increases longitude by 10 and height by 2.
+   * - RAIN: Increases longitude by 5.
+   * - FOG: Increases longitude by 1.
+   * - SNOW: Decreases height by 12.
+   * Lands if height drops to 0 or below, and unregisters from tower.
+   */
   @Override
   public void updateConditions() {
     Simulation sim = Simulation.getInstance();
@@ -24,12 +30,6 @@ public class Helicopter extends Aircraft {
     // + getCoordinates().getLongitude() + ","
     // + getCoordinates().getLatitude() + ","
     // + getCoordinates().getHeight()); // for debugging
-
-    // • Helicopter:
-    // ◦ SUN - Longitude increases with 10, Height increases with 2
-    // ◦ RAIN - Longitude increases with 5
-    // ◦ FOG - Longitude increases with 1
-    // ◦ SNOW - Height decreases with 12
 
     if (currentWeather.equals("SUN")) {
       sim.announce(getTag() + ": This is hot.");

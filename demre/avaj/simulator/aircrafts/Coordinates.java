@@ -1,27 +1,24 @@
 package demre.avaj.simulator.aircrafts;
 
-// class Coordinates
-// {
-// -int longitude
-// -int latitute
-// -int height
-// ~Coordinates(int p_longitude, int p_latitude, int p_height)
-// +int getLongitude()
-// +int getLatitude()
-// +int getHeight()
-// }
-
+/**
+ * Represents the coordinates of a three dimensional point in the simulation.
+ * This class encapsulates the longitude, latitude, and height.
+ */
 public class Coordinates {
 
   private int longitude;
   private int latitute;
   private int height;
 
+  // Constructor
+
   Coordinates(int p_longitude, int p_latitude, int p_height) {
     this.longitude = p_longitude;
     this.latitute = p_latitude;
     this.height = p_height;
   }
+
+  // Getters
 
   public int getLongitude() {
     return longitude;
@@ -34,6 +31,8 @@ public class Coordinates {
   public int getHeight() {
     return height;
   }
+
+  // Setters
 
   public void setLongitude(int p_longitude) {
     this.longitude = p_longitude;

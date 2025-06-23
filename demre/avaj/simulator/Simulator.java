@@ -39,7 +39,6 @@ public class Simulator {
 
     } catch (Exception e) {
       errorAndExit(e.getMessage());
-      // e.printStackTrace();
 
       // } catch (Error err) {
       // errorAndExit(err.getMessage());
@@ -47,6 +46,14 @@ public class Simulator {
     System.exit(0);
   }
 
+  /**
+   * Checks if the scenario file is valid.
+   * 
+   * @param scenarioFileName the name of the scenario file to check
+   * @throws InvalidScenarioException
+   * @throws FileNotFoundException
+   * @throws IOException
+   */
   private static void checkScenarioFile(String scenarioFileName)
       throws InvalidScenarioException, FileNotFoundException, IOException {
     File scenarioFile = new File(scenarioFileName);
@@ -59,6 +66,11 @@ public class Simulator {
     checkScenarioFileContent(scenarioFile);
   }
 
+  /**
+   * Checks the content of the scenario file.
+   * 
+   * @param scenarioFile the scenario file to check
+   */
   private static void checkScenarioFileContent(File scenarioFile)
       throws InvalidScenarioException, FileNotFoundException, IOException {
 
@@ -119,7 +131,12 @@ public class Simulator {
     }
   }
 
-  public static void errorAndExit(String message) {
+  /**
+   * Prints an error message and exits the program with a non-zero status.
+   * 
+   * @param message the error message to print
+   */
+  private static void errorAndExit(String message) {
     System.out.println("\u001B[31mError:\u001B[0m " + message);
     System.exit(1);
   }

@@ -1,15 +1,22 @@
 package demre.avaj.simulator.factory;
 
-import demre.avaj.simulator.aircrafts.*;
+import demre.avaj.simulator.aircrafts.Coordinates;
+import demre.avaj.simulator.aircrafts.Flyable;
+import demre.avaj.simulator.aircrafts.Baloon;
+import demre.avaj.simulator.aircrafts.Helicopter;
+import demre.avaj.simulator.aircrafts.JetPlane;
 
-// class AircraftFactory <<Singleton>>
-// {
-// +Flyable* newAircraft(string p_type, string p_name, Coordinates p_coordinates)
-// }
+// Singleton
+// Factory design pattern is used to encapsulate the instantiation logic
 
+/**
+ * AircraftFactory is a singleton class responsible for creating
+ * Flyable aircraft objects.
+ */
 public class AircraftFactory {
   // Static instance of the singleton
   private static AircraftFactory instance;
+
   private long maxId; // Current max aircraft unique ID
 
   // Private constructor to prevent instantiation
@@ -37,6 +44,16 @@ public class AircraftFactory {
 
   // Member functions
 
+  /**
+   * Creates a new Flyable aircraft based on the specified type.
+   * The aircraft is assigned a unique ID and initialised with the provided name
+   * and coordinates.
+   *
+   * @param p_type        The type of aircraft to create.
+   * @param p_name        The name of the aircraft.
+   * @param p_coordinates The initial coordinates of the aircraft.
+   * @return A new Flyable aircraft object.
+   */
   public Flyable newAircraft(String p_type, String p_name, Coordinates p_coordinates) {
     Flyable flyable;
     long id = getMaxId() + 1;

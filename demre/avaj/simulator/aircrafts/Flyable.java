@@ -2,17 +2,17 @@ package demre.avaj.simulator.aircrafts;
 
 import demre.avaj.simulator.tower.WeatherTower;
 
-// abstract Flyable
-// {
-// #WeatherTower weatherTower
-// +abstract void updateConditions()
-// +registerTower(WeatherTower* p_tower)
-// }
-
 // If Flyable was an 'interface', every method would be implicitely public abstract.
 // As we have both abstract and concrete methods, it must be an abstract class and the relationship in the uml '<|..' is incorrect. 
 // '<|..' is for interface implementation
 
+/**
+ * Represents a flyable object in the simulation.
+ * This class serves as a base for all aircraft types that can interact with the
+ * weather tower.
+ * Each subclass must implement the updateConditions method to define its
+ * specific behavior.
+ */
 public abstract class Flyable {
   protected WeatherTower weatherTower;
 
@@ -25,7 +25,7 @@ public abstract class Flyable {
     p_tower.register(this);
   }
 
-  // Additional functions
+  // Getters - Setters
 
   public abstract String getName();
 

@@ -1,5 +1,10 @@
 package demre.avaj.simulator.customExceptions;
 
+/**
+ * InvalidScenarioException is thrown when the scenario file is invalid.
+ * This exception extends IllegalArgumentException to indicate that the
+ * provided scenario does not meet the expected format or criteria.
+ */
 public class InvalidScenarioException extends IllegalArgumentException {
   // Default constructor
   public InvalidScenarioException() {

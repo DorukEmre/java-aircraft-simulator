@@ -5,19 +5,17 @@ import java.util.List;
 
 import demre.avaj.simulator.aircrafts.Flyable;
 
-// class Tower
-// {
-// - List<Flyable*> observers
-// +void register(Flyable* p_flyable)
-// +void unregister(Flyable* p_flyable)
-// #void conditionChanged()
-// }
-
 // Subject in Observer behavioral pattern
 // Tower acts as a subject/publisher, notifying Flyable objects (observers/subscribers) of changes
 
+/**
+ * Tower allows Flyable objects to register and unregister themselves, and
+ * notifies them when the weather conditions change.
+ */
 public class Tower {
+  // List of registered Flyable observers
   private List<Flyable> observers;
+  // Queue for Flyable observers to be unregistered after notification cycle
   private List<Flyable> observersToUnregister;
 
   Tower() {
@@ -25,17 +23,24 @@ public class Tower {
     this.observersToUnregister = new ArrayList<Flyable>();
   }
 
-  // == addObserver()
+  public List<Flyable> getObservers() {
+    return observers;
+  }
+
   public void register(Flyable p_flyable) {
     observers.add(p_flyable);
   }
 
-  // == removeObserver()
   public void unregister(Flyable p_flyable) {
     observers.remove(p_flyable);
   }
 
-  // == notifyObservers()
+  /**
+   * Notify all registered observers (Flyable objects) about a change in weather
+   * conditions.
+   * Unregistered observers are processed after all notifications to avoid
+   * concurrent modification issues.
+   */
   protected void conditionChanged() {
     // Notify all observers about a change in state
     if (observers != null) {
@@ -46,10 +51,11 @@ public class Tower {
     }
   }
 
-  public void addToUnregisterQueue(Flyable p_flyable) {
-    observersToUnregister.add(p_flyable);
-  }
-
+  /**
+   * Process the queue of Flyable observers to be unregistered.
+   * This method is called after all observers have been notified to ensure that
+   * unregistration does not interfere with the notification process.
+   */
   private void processUnregisterQueue() {
     for (Flyable observer : observersToUnregister) {
       unregister(observer);
@@ -57,8 +63,15 @@ public class Tower {
     observersToUnregister.clear();
   }
 
-  public List<Flyable> getObservers() {
-    return observers;
+  /**
+   * Add a Flyable object to the queue for unregistration.
+   * This is used to defer unregistration until after all observers have been
+   * notified.
+   * 
+   * @param p_flyable the Flyable object to unregister
+   */
+  public void addToUnregisterQueue(Flyable p_flyable) {
+    observersToUnregister.add(p_flyable);
   }
 
 }

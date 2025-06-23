@@ -1,11 +1,9 @@
 package demre.avaj.simulator.aircrafts;
 
-// class Baloon
-// {
-// +Baloon(long p_id, string p_name, Coordinates p_coordinate)
-// +void updateConditions()
-// }
-
+/**
+ * Represents a balloon in the simulation.
+ * Inherits from the Aircraft class and implements own specific behavior.
+ */
 public class Baloon extends Aircraft {
 
   public Baloon(long p_id, String p_name, Coordinates p_coordinate) {
@@ -15,6 +13,14 @@ public class Baloon extends Aircraft {
         + "(" + p_id + ")";
   }
 
+  /**
+   * Updates coordinates of the balloon based on the current weather:
+   * - SUN: Increases longitude by 2 and height by 4.
+   * - RAIN: Decreases height by 5.
+   * - FOG: Decreases height by 3.
+   * - SNOW: Decreases height by 15.
+   * Lands if height drops to 0 or below, and unregisters from tower.
+   */
   @Override
   public void updateConditions() {
     Simulation sim = Simulation.getInstance();
@@ -25,22 +31,20 @@ public class Baloon extends Aircraft {
     // + getCoordinates().getLatitude() + ","
     // + getCoordinates().getHeight()); // for debugging
 
-    // • Balloon:
-    // ◦ SUN - Longitude increases with 2, Height increases with 4
-    // ◦ RAIN - Height decreases with 5
-    // ◦ FOG - Height decreases with 3
-    // ◦ SNOW - Height decreases with 15
-
     if (currentWeather.equals("SUN")) {
-      sim.announce(getTag() + ": Let's enjoy the good weather and take some pics.");
+      sim.announce(getTag()
+          + ": Let's enjoy the good weather and take some pics.");
       updateLongitude(2);
       updateHeight(4);
+
     } else if (currentWeather.equals("RAIN")) {
       sim.announce(getTag() + ": Damn you rain! You messed up my balloon.");
       updateHeight(-5);
+
     } else if (currentWeather.equals("FOG")) {
       sim.announce(getTag() + ": Can't see anything! We're flying blind.");
       updateHeight(-3);
+
     } else if (currentWeather.equals("SNOW")) {
       sim.announce(getTag() + ": It's snowing. We're gonna crash.");
       updateHeight(-15);
