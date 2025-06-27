@@ -1,7 +1,5 @@
 SHELL		= /bin/sh
 
-NAME		= avaj_launcher
-
 SOURCES	= $(shell find * -name "*.java")
 TARGET	= sources.txt
 OUTPUT	= simulation.txt
@@ -11,14 +9,14 @@ all: compile run
 
 compile:
 	@printf "%s\n" $(SOURCES) > $(TARGET)
-	@echo "$$(wc -l < $(TARGET)) files copied to $(TARGET)"
+	@echo "$$(wc -l < $(TARGET)) files copied to $(TARGET) file"
 	@mkdir -p $(BIN_DIR)
 	@echo "Compiling Java sources:"
-	javac -d $(BIN_DIR) @sources.txt
+	javac -d $(BIN_DIR) @$(TARGET)
 
 run:
 	@echo "Running the Java simulator:"
-	java -cp bin demre.avaj.simulator.Simulator scenario.txt
+	java -cp $(BIN_DIR) aircraft.simulator.Simulator scenario.txt
 
 clean:
 	rm -f $(TARGET)

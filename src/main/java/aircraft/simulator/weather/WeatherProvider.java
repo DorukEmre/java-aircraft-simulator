@@ -1,9 +1,9 @@
-package demre.avaj.simulator.weather;
+package aircraft.simulator.weather;
 
 import java.util.Random;
 
-import demre.avaj.simulator.aircrafts.Coordinates;
-import demre.avaj.simulator.aircrafts.Simulation;
+import aircraft.simulator.aircrafts.Coordinates;
+import aircraft.simulator.aircrafts.Simulation;
 
 // Singleton
 

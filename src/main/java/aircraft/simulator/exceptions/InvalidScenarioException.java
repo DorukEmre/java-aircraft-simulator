@@ -1,4 +1,4 @@
-package demre.avaj.simulator.exceptions;
+package aircraft.simulator.exceptions;
 
 /**
  * InvalidScenarioException is thrown when the scenario file is invalid.

@@ -1,4 +1,4 @@
-package demre.avaj.simulator.aircrafts;
+package aircraft.simulator.aircrafts;
 
 /**
  * Represents the coordinates of a three dimensional point in the simulation.

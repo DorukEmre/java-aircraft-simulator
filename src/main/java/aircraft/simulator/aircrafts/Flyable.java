@@ -1,6 +1,6 @@
-package demre.avaj.simulator.aircrafts;
+package aircraft.simulator.aircrafts;
 
-import demre.avaj.simulator.tower.WeatherTower;
+import aircraft.simulator.tower.WeatherTower;
 
 // If Flyable was an 'interface', every method would be implicitely public abstract.
 // As we have both abstract and concrete methods, it must be an abstract class and the relationship in the uml '<|..' is incorrect. 

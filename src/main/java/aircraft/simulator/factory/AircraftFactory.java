@@ -1,10 +1,10 @@
-package demre.avaj.simulator.factory;
+package aircraft.simulator.factory;
 
-import demre.avaj.simulator.aircrafts.Coordinates;
-import demre.avaj.simulator.aircrafts.Flyable;
-import demre.avaj.simulator.aircrafts.Baloon;
-import demre.avaj.simulator.aircrafts.Helicopter;
-import demre.avaj.simulator.aircrafts.JetPlane;
+import aircraft.simulator.aircrafts.Coordinates;
+import aircraft.simulator.aircrafts.Flyable;
+import aircraft.simulator.aircrafts.Baloon;
+import aircraft.simulator.aircrafts.Helicopter;
+import aircraft.simulator.aircrafts.JetPlane;
 
 // Singleton
 // Factory design pattern is used to encapsulate the instantiation logic

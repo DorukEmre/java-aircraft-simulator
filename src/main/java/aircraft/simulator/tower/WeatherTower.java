@@ -1,9 +1,9 @@
-package demre.avaj.simulator.tower;
+package aircraft.simulator.tower;
 
-import demre.avaj.simulator.aircrafts.Coordinates;
-import demre.avaj.simulator.aircrafts.Flyable;
-import demre.avaj.simulator.aircrafts.Simulation;
-import demre.avaj.simulator.weather.WeatherProvider;
+import aircraft.simulator.aircrafts.Coordinates;
+import aircraft.simulator.aircrafts.Flyable;
+import aircraft.simulator.aircrafts.Simulation;
+import aircraft.simulator.weather.WeatherProvider;
 
 // ConcreteSubject in Observer behavioral pattern
 

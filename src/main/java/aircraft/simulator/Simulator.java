@@ -1,4 +1,4 @@
-package demre.avaj.simulator;
+package aircraft.simulator;
 
 import java.io.File;
 import java.io.BufferedReader;
@@ -7,8 +7,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 
-import demre.avaj.simulator.aircrafts.Simulation;
-import demre.avaj.simulator.exceptions.InvalidScenarioException;
+import aircraft.simulator.aircrafts.Simulation;
+import aircraft.simulator.exceptions.InvalidScenarioException;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

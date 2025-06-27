@@ -1,12 +1,12 @@
-package demre.avaj.simulator.aircrafts;
+package aircraft.simulator.aircrafts;
 
 /**
- * Represents a jet plane in the simulation.
+ * Represents a helicopter in the simulation.
  * Inherits from the Aircraft class and implements own specific behavior.
  */
-public class JetPlane extends Aircraft {
+public class Helicopter extends Aircraft {
 
-  public JetPlane(long p_id, String p_name, Coordinates p_coordinate) {
+  public Helicopter(long p_id, String p_name, Coordinates p_coordinate) {
     super(p_id, p_name, p_coordinate);
     this.tag = this.getClass().getSimpleName()
         + "#" + p_name
@@ -15,10 +15,10 @@ public class JetPlane extends Aircraft {
 
   /**
    * Updates coordinates of the helicopter based on the current weather:
-   * - SUN: Increases latitude by 10 and height by 2.
-   * - RAIN: Increases latitude by 5.
-   * - FOG: Increases latitude by 1.
-   * - SNOW: Decreases height by 7.
+   * - SUN: Increases longitude by 10 and height by 2.
+   * - RAIN: Increases longitude by 5.
+   * - FOG: Increases longitude by 1.
+   * - SNOW: Decreases height by 12.
    * Lands if height drops to 0 or below, and unregisters from tower.
    */
   @Override
@@ -32,22 +32,21 @@ public class JetPlane extends Aircraft {
     // + getCoordinates().getHeight()); // for debugging
 
     if (currentWeather.equals("SUN")) {
-      sim.announce(getTag() + ": Clear skies ahead. Perfect for flying.");
-      updateLatitude(10);
+      sim.announce(getTag() + ": This is hot.");
+      updateLongitude(10);
       updateHeight(2);
 
     } else if (currentWeather.equals("RAIN")) {
-      sim.announce(getTag()
-          + ": It's raining. Better watch out for lightings.");
-      updateLatitude(5);
+      sim.announce(getTag() + ": Heavy rain! Watch out for turbulence.");
+      updateLongitude(5);
 
     } else if (currentWeather.equals("FOG")) {
-      sim.announce(getTag() + ": Visibility is low. Proceeding with caution.");
-      updateLatitude(1);
+      sim.announce(getTag() + ": The fog is thick. Navigating carefully.");
+      updateLongitude(1);
 
     } else if (currentWeather.equals("SNOW")) {
-      sim.announce(getTag() + ": OMG! Winter is coming!");
-      updateHeight(-7);
+      sim.announce(getTag() + ": My rotor is going to freeze!");
+      updateHeight(-12);
     }
 
     // sim.announce("New coordinates: "

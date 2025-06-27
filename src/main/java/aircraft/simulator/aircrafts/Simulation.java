@@ -1,4 +1,4 @@
-package demre.avaj.simulator.aircrafts;
+package aircraft.simulator.aircrafts;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -8,10 +8,10 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Random;
 
-import demre.avaj.simulator.factory.AircraftFactory;
-import demre.avaj.simulator.tower.WeatherTower;
+import aircraft.simulator.factory.AircraftFactory;
+import aircraft.simulator.tower.WeatherTower;
 
-import demre.avaj.simulator.exceptions.SimulationException;
+import aircraft.simulator.exceptions.SimulationException;
 
 /**
  * Manages the simulation of aircraft and weather interactions.

@@ -1,9 +1,9 @@
-package demre.avaj.simulator.tower;
+package aircraft.simulator.tower;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import demre.avaj.simulator.aircrafts.Flyable;
+import aircraft.simulator.aircrafts.Flyable;
 
 // Subject in Observer behavioral pattern
 // Tower acts as a subject/publisher, notifying Flyable objects (observers/subscribers) of changes

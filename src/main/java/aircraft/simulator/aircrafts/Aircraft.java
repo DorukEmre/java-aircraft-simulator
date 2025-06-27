@@ -1,4 +1,4 @@
-package demre.avaj.simulator.aircrafts;
+package aircraft.simulator.aircrafts;
 
 /**
  * Represents a base class for all aircraft types in the simulation.

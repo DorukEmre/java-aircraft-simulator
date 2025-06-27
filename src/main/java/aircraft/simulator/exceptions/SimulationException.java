@@ -1,4 +1,4 @@
-package demre.avaj.simulator.exceptions;
+package aircraft.simulator.exceptions;
 
 /**
  * SimulationException is thrown when an error occurs during the simulation.
