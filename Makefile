@@ -7,21 +7,24 @@ BIN_DIR	= bin
 
 all: compile run
 
-compile:
+compile	:
 	@printf "%s\n" $(SOURCES) > $(TARGET)
 	@echo "$$(wc -l < $(TARGET)) files copied to $(TARGET) file"
 	@mkdir -p $(BIN_DIR)
 	@echo "Compiling Java sources:"
 	javac -d $(BIN_DIR) @$(TARGET)
 
-run:
+run			:
 	@echo "Running the Java simulator:"
 	java -cp $(BIN_DIR) aircraft.simulator.Simulator scenario.txt
 
-clean:
+clean		:
 	rm -f $(TARGET)
-	rm -f $(OUTPUT)
 	rm -rf $(BIN_DIR)
+	rm -f $(OUTPUT)
 	find . -name "*.class" -type f -delete
 
-re: clean all
+re			: clean all
+
+.PHONY	: all compile run clean re
+.DEFAULT_GOAL := all
